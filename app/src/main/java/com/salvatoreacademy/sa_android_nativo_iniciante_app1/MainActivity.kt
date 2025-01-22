@@ -1,5 +1,6 @@
 package com.salvatoreacademy.sa_android_nativo_iniciante_app1
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -26,6 +27,13 @@ class MainActivity : AppCompatActivity() {
         cvCreature.setOnClickListener {
             // Comportamento que será executado ao clicar no elemento
             Toast.makeText(this, "CardView clicado!", Toast.LENGTH_SHORT).show()
+
+            // Abrir uma nova Activity
+            // Criamos a Intent
+            val newActivityIntent = Intent(this, CreatureViewActivity::class.java)
+
+            // Registramos a Intent com o resultado esperado (abrir activity)
+            startActivity(newActivityIntent)
         }
     }
 }
