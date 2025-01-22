@@ -1,8 +1,10 @@
 package com.salvatoreacademy.sa_android_nativo_iniciante_app1
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -15,6 +17,15 @@ class MainActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        // Buscar elemento pelo ID e armazenar em variável (val ou var)
+        val cvCreature = findViewById<CardView>(R.id.cvCreature)
+
+        // Criar um Listener de clique para o elemento
+        cvCreature.setOnClickListener {
+            // Comportamento que será executado ao clicar no elemento
+            Toast.makeText(this, "CardView clicado!", Toast.LENGTH_SHORT).show()
         }
     }
 }
