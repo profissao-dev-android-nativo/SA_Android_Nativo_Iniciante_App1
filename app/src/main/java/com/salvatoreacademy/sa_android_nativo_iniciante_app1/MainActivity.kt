@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,20 +22,17 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // Buscar elemento pelo ID e armazenar em variável (val ou var)
-        val cvCreature = findViewById<CardView>(R.id.cvCreature)
+        // Busca a RecyclerView pelo ID
+        val rvCreatures = findViewById<RecyclerView>(R.id.rvCreatures)
 
-        // Criar um Listener de clique para o elemento
-        cvCreature.setOnClickListener {
-            // Comportamento que será executado ao clicar no elemento
-            Toast.makeText(this, "CardView clicado!", Toast.LENGTH_SHORT).show()
+        val items = listOf(
+            Creature(1, "Java", "https://www.salvatore.academy/devmon/1_java.png"),
+            Creature(2, "Kotlin", "https://www.salvatore.academy/devmon/2_kotlin.png"),
+            Creature(3, "Android", "https://www.salvatore.academy/devmon/3_android.png")
+        )
 
-            // Abrir uma nova Activity
-            // Criamos a Intent
-            val newActivityIntent = Intent(this, CreatureViewActivity::class.java)
-
-            // Registramos a Intent com o resultado esperado (abrir activity)
-            startActivity(newActivityIntent)
-        }
+        // Adicionamos o Adapter (customizado) e o LayoutManager (fornecido pelo Android)
+        rvCreatures.adapter = CreatureListAdapter(items)
+        rvCreatures.layoutManager = LinearLayoutManager(this)
     }
 }
