@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             .baseUrl("https://devmon-api.onrender.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        
+
         val service = retrofit.create(CreatureApiService::class.java)
         val call = service.listCreatures()
         call.enqueue(object : Callback<List<Creature>> {
