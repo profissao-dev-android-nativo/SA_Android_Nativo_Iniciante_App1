@@ -1,6 +1,7 @@
 package com.salvatoreacademy.sa_android_nativo_iniciante_app1
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -59,12 +60,15 @@ class MainActivity : AppCompatActivity() {
             }
 
             // Caso a resposta da API dê erro, executa o onFailure
-            override fun onFailure(p0: Call<List<Creature>>, p1: Throwable) {
+            override fun onFailure(p0: Call<List<Creature>>, t: Throwable) {
                 Toast.makeText(
                     this@MainActivity,
                     "Erro ao carregar criaturas.",
                     Toast.LENGTH_SHORT
                 ).show()
+
+                // Exibir o erro no Logcat
+                Log.e("CREATURE_LOAD", "Error loading creatures from API.", t)
             }
         })
     }
