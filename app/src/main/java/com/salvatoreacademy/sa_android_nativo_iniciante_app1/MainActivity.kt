@@ -35,12 +35,27 @@ class MainActivity : AppCompatActivity() {
         val call = service.listCreatures()
         call.enqueue(object : Callback<List<Creature>> {
             // Caso a resposta da API seja bem sucedida, executa o onResponse
-            override fun onResponse(p0: Call<List<Creature>>, p1: Response<List<Creature>>) {
+            override fun onResponse(p0: Call<List<Creature>>, response: Response<List<Creature>>) {
                 Toast.makeText(
                     this@MainActivity,
                     "Lista de criaturas carregada com sucesso!",
                     Toast.LENGTH_SHORT
                 ).show()
+
+                response.body()?.let {
+                    // Busca a RecyclerView pelo ID
+                    val rvCreatures = findViewById<RecyclerView>(R.id.rvCreatures)
+
+//                    val items = listOf(
+//                        Creature(1, "Java", "https://www.salvatore.academy/devmon/1_java.png"),
+//                        Creature(2, "Kotlin", "https://www.salvatore.academy/devmon/2_kotlin.png"),
+//                        Creature(3, "Android", "https://www.salvatore.academy/devmon/3_android.png")
+//                    )
+
+                    // Adicionamos o Adapter (customizado) e o LayoutManager (fornecido pelo Android)
+                    rvCreatures.adapter = CreatureListAdapter(it)
+                    rvCreatures.layoutManager = LinearLayoutManager(this@MainActivity)
+                }
             }
 
             // Caso a resposta da API dê erro, executa o onFailure
@@ -52,18 +67,5 @@ class MainActivity : AppCompatActivity() {
                 ).show()
             }
         })
-
-        // Busca a RecyclerView pelo ID
-        val rvCreatures = findViewById<RecyclerView>(R.id.rvCreatures)
-
-        val items = listOf(
-            Creature(1, "Java", "https://www.salvatore.academy/devmon/1_java.png"),
-            Creature(2, "Kotlin", "https://www.salvatore.academy/devmon/2_kotlin.png"),
-            Creature(3, "Android", "https://www.salvatore.academy/devmon/3_android.png")
-        )
-
-        // Adicionamos o Adapter (customizado) e o LayoutManager (fornecido pelo Android)
-        rvCreatures.adapter = CreatureListAdapter(items)
-        rvCreatures.layoutManager = LinearLayoutManager(this)
     }
 }
