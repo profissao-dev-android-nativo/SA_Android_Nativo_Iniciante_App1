@@ -4,20 +4,28 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class CreatureListAdapter(private val items: List<Creature>) : RecyclerView.Adapter<CreatureListAdapter.CreatureViewHolder>() {
 
     class CreatureViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(item: Creature) {
+            // Exibição do Número
             val tvNumber = itemView.findViewById<TextView>(R.id.tvNumber)
             tvNumber.text = item.number.toString()
 
+            // Exibição do Nome
             val tvName = itemView.findViewById<TextView>(R.id.tvName)
             tvName.text = item.name
+
+            // Carregamento da Imagem com Glide
+            val ivCreature = itemView.findViewById<ImageView>(R.id.ivCreature)
+            Glide.with(itemView).load(item.imageUrl).into(ivCreature)
 
             // Buscar elemento pelo ID e armazenar em variável (val ou var)
             val cvCreature = itemView.findViewById<CardView>(R.id.cvCreature)

@@ -24,10 +24,11 @@
 
             <ImageView
                 android:id="@+id/ivCreature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="8dp"
                 android:background="#009688"
+                android:padding="8dp"
                 app:srcCompat="@drawable/ic_launcher_foreground" />
 
             <TextView
